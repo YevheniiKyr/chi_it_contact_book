@@ -3,11 +3,11 @@ package com.example.chi_it_contact_book.Services;
 import com.example.chi_it_contact_book.Entities.Contact;
 import com.example.chi_it_contact_book.Repositories.ContactRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +15,7 @@ public class ContactService {
 
 
     private final ContactRepository contactRepository;
+
 
 
 
@@ -42,4 +43,7 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
+    public List<Contact> getByUserId(Long userId) {
+        return contactRepository.findAllByUser_Id(userId);
+    }
 }

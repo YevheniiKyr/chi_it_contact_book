@@ -2,7 +2,6 @@ package com.example.chi_it_contact_book.Entities;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +20,7 @@ public class Email {
 
     @Column(unique = true, nullable = false)
     private String email;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(
             nullable = false,

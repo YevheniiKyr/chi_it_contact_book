@@ -20,11 +20,14 @@ public class Phone {
     @Column( nullable = false)
     private String number;
 
+
+//    ( cascade = CascadeType.ALL)
     @ManyToOne
     @JsonBackReference
     @JoinColumn(
             nullable = false,
             name = "contact_id"
+
     )
     private Contact contact;
 

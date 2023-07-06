@@ -1,14 +1,16 @@
 package com.example.chi_it_contact_book.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode()
-@ToString()
+@EqualsAndHashCode(exclude = {"contacts"})
+@ToString(exclude = {"contacts"})
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
@@ -25,10 +27,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(
+    @JsonBackReference
+    @OneToMany(
+          //  cascade = CascadeType.ALL,
             mappedBy = "user"
     )
-   private Contact contact;
+   private List<Contact> contacts;
 
     public User(Long id, String username) {
         this.id = id;

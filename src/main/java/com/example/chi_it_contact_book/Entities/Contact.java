@@ -1,13 +1,8 @@
 package com.example.chi_it_contact_book.Entities;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -24,9 +19,9 @@ public class Contact {
     private Long id;
 
 
-    @Column (unique = true)
+    @Column
     private String name;
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 
     private Set<Email> emails;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
@@ -34,7 +29,7 @@ public class Contact {
     private Set<Phone> phones;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(
             name = "user_id",
             nullable = false
