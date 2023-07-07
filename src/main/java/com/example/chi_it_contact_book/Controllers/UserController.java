@@ -1,6 +1,6 @@
 package com.example.chi_it_contact_book.Controllers;
 
-import com.example.chi_it_contact_book.Entities.User;
+import com.example.chi_it_contact_book.auth.User;
 import com.example.chi_it_contact_book.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

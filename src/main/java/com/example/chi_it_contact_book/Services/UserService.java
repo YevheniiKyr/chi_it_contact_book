@@ -1,6 +1,6 @@
 package com.example.chi_it_contact_book.Services;
 
-import com.example.chi_it_contact_book.Entities.User;
+import com.example.chi_it_contact_book.auth.User;
 import com.example.chi_it_contact_book.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

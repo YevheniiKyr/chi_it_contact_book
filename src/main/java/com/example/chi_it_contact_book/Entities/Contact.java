@@ -1,5 +1,6 @@
 package com.example.chi_it_contact_book.Entities;
 
+import com.example.chi_it_contact_book.auth.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @ToString(exclude = {"emails", "phones"})
 @AllArgsConstructor
 @Entity(name = "Contact")
+@Builder
 
 public class Contact {
     @Id
@@ -40,4 +42,6 @@ public class Contact {
         this.user = user;
         this.name = name;
     }
+
+
 }

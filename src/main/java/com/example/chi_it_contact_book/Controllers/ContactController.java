@@ -4,7 +4,7 @@ import com.example.chi_it_contact_book.DTO.requestsDTO.ContactDTO;
 import com.example.chi_it_contact_book.Entities.Contact;
 import com.example.chi_it_contact_book.Entities.Email;
 import com.example.chi_it_contact_book.Entities.Phone;
-import com.example.chi_it_contact_book.Entities.User;
+import com.example.chi_it_contact_book.auth.User;
 import com.example.chi_it_contact_book.Exceptions.AlreadyExistsException;
 import com.example.chi_it_contact_book.Exceptions.ResourceNotFoundException;
 import com.example.chi_it_contact_book.Mappers.ContactMappers.ContactMapperImpl;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("contacts/")
+@RequestMapping("/contacts")
 public class ContactController {
 
 
@@ -38,7 +38,7 @@ public class ContactController {
 
 
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<ContactDTO>> getContacts(@RequestParam(name = "user", required = false)  Long user_id) {
         if (user_id != null) {
             List<Contact> contacts = contactService.getByUserId(user_id);
@@ -51,8 +51,9 @@ public class ContactController {
 
         }
     }
+
     @Transactional
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ContactDTO> updateContact(@RequestBody @Valid ContactDTO contactDTO, @PathVariable Long id) {
 
         Contact newContact = contactMapper.toContact(contactDTO);
@@ -91,13 +92,14 @@ public class ContactController {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Contact> getById(@PathVariable Long id) {
+        System.out.println("GET BU ID");
         return ResponseEntity.status(HttpStatus.CREATED).body(contactService.getById(id).orElseThrow(() -> new ResourceNotFoundException("Contact doesn't exist")));
     }
 
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteContact(@PathVariable Long id) {
         contactService.deleteById(id);
         return ResponseEntity.ok().body("object deleted: " + id);
